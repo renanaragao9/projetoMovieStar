@@ -9,7 +9,6 @@
         public $image;
         public $bio;
         public $token;
-
     }
 
     interface UserDAOInterface {
