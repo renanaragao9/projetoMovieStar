@@ -42,7 +42,7 @@
                         </div>
                         <div class="form-group">
                             <label for="confirmpassword">Confirmação de Senha:</label>
-                            <input type="password" class="form-control" id="password" name="password" placeholder="Digite sua senha">
+                            <input type="password" class="form-control" id="confirmpassword" name="confirmpassword" placeholder="Repita sua senha">
                         </div>
                         <input type="submit" class="btn card-btn" value="Registrar">
                     </form>
