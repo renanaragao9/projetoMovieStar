@@ -42,6 +42,8 @@
 
                    $auth = true;
 
+                   $userDao->create($user, $auth);
+
                 } else {
 
                     // Enviar uma mensagem de erro de senha não se batem
