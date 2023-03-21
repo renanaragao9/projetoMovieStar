@@ -22,7 +22,7 @@
                         <p class="page-description">Altere seus dados no formulário abaixo:</p>
                         <div class="form-group">
                             <label for="nome">Nome:</label>
-                            <input type="text" class="form-control" id="nome" name="nome" placeholder="Digite o seu nome" value="<?= $userData->name ?>">
+                            <input type="text" class="form-control" id="nome" name="name" placeholder="Digite o seu nome" value="<?= $userData->name ?>">
                         </div>
                         <div class="form-group">
                             <label for="lastname">Sobrenome:</label>
