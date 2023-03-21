@@ -37,7 +37,7 @@
                    $user->name = $name;
                    $user->lastname = $lastname;
                    $user->email = $email;
-                   $user->password = $password;
+                   $user->password = $finalPassword;
                    $user->token = $userToken;
 
                    $auth = true;
@@ -67,12 +67,12 @@
         // Tenta autenticar usuário, caso não conseguir autenticar
         if($userDao->authenticateUser($email, $password)) {
 
-             
+            $Message->setMessage("Seja bem-vindo!", "success", "editprofile.php");
+
             // Redireciona o usuário, caso não conseguir autenticar
         } else {
+           
             $Message->setMessage("Usuário e/ou senha incorretos.", "error","back");
         }
-    } else {
-        $Message->setMessage("Informações inválidas!", "error","index.php");
     }
 ?>

@@ -62,7 +62,7 @@
                         </li>
                         <li class="nav-item">
                             <a href="<?= $BASE_URL ?>editprofile.php" class="nav-link">
-                                <?= $userdata->name ?>
+                                <?= $userData->name ?>
                             </a>
                         </li>
                         <li class="nav-item">
