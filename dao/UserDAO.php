@@ -55,17 +55,25 @@
         }
 
         public function verifyToken($protected = false) {
-            // Pega o token da session
-            $token = $_SESSION["token"];
-
-            $user = $this->findByToken($token);
-
-            if($user) {
+           
+            if(!empty($_SESSION["token"])) {
                 
-                return $user;
+                // Pega o token da session
+                $token = $_SESSION["token"];
 
-            } else {
-                
+                $user = $this->findByToken($token);
+    
+                if($user) {
+                    
+                    return $user;
+
+                } else if($protected) {
+                    
+                    // Redireciona para o perfil do usuario
+                    $this->message->setMessage("Faça a autenticação para acessar esta página!", "error", "index.php");
+                }
+            } else if($protected) {
+                    
                 // Redireciona para o perfil do usuario
                 $this->message->setMessage("Faça a autenticação para acessar esta página!", "error", "index.php");
             }
@@ -123,6 +131,14 @@
                     return false;
                 }
             }
+        }
+
+        public function destroyToken(){
+            // Remove o token da session
+            $_SESSION["token"] = "";
+
+             // Redirecionar e apresentar a mensagem de sucesso
+             $this->message->setMessage("Você fez o logout com sucesso!", "success", "index.php");
         }
 
         public function changePassword(User $user) {
