@@ -51,7 +51,7 @@
         }
 
         public function update(User $user) {
-
+            
         }
 
         public function verifyToken($protected = false) {
@@ -92,7 +92,27 @@
         }
 
         public function authenticateUser($email, $password) {
+            $user = $this->findByEmail($email);
 
+            if($user) {
+                // Checar se as senhas batem
+                if(password_verify($password, $user->password)) {
+
+                    // Gerar um token e inserir na session
+                    $token = $user->generateToken();
+
+                    $this->setTokenToSession($token);
+
+                    // Atualizar token no usuário
+                    $user->token = $token;
+
+                    $this->update($user);
+
+                    return true;
+                } else {
+                    return false;
+                }
+            }
         }
 
         public function findByEmail($email) {
