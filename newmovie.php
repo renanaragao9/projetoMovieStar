@@ -40,6 +40,10 @@
                     </select>
                 </div>
                 <div class="form-group">
+                    <label for="trailer">Trailer:</label>
+                    <input type="text" class="form-control" id="trailer" name="trailer" placeholder="Link do trailer">
+                </div>
+                <div class="form-group">
                     <label for="description">Descrição:</label>
                     <textarea name="description" class="form-control" id="description" rows="5" placeholder="Descreva o filme..."></textarea>
                 </div>

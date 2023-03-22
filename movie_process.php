@@ -8,6 +8,7 @@
 
     $message = new Message($BASE_URL);
     $userDao = new UserDAO($conn, $BASE_URL);
+    $movieDao = new MovieDAO($conn, $BASE_URL);
 
     //Resgatar o tipo de formulario
     $type = filter_input(INPUT_POST, "type");
@@ -34,6 +35,7 @@
             $movie->trailer = $trailer;
             $movie->category = $category;
             $movie->length = $length;
+            $movie->users_id = $userData->id;
 
             // Upload de imagem do filme
             if(isset($_FILES["image"]) && !empty($_FILES["image"]["tmp_name"])) {
@@ -67,8 +69,6 @@
                     $Message->setMessage("Tipo inválido de imagem, insira png ou jpg!", "error", "back");
                 }
             }
-
-            print_r($_POST); print_r($_FILES); exit;
 
             $movieDao->create($movie);
 
