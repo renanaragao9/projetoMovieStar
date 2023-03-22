@@ -38,23 +38,24 @@
            
             $image = $_FILES["image"];
             $imageTypes = ["image/jpeg", "image/jpg", "image/png"];
-            $jpgArray = ["image/jpeg", "image/jpg"];
+            $jpgArray = ["image/png"];
 
             // Checagem de tipo de imagem
             if(in_array($image["type"], $imageTypes)) {
 
-                // Checar se é jpg ou jpeg
-                if(in_array($image, $jpgArray)) {
-                    
-                    $imageFile = imagecreatefromjpeg($image["tmp_name"]);
-
-                    // Imagem é png
-                } else {
+                // Checar se é png
+                if(in_array($image["type"], $jpgArray)) {
                     
                     $imageFile = imagecreatefrompng($image["tmp_name"]);
+                    
+                    // Checar se é jpg ou jpeg
+                } else {
+                    
+                    $imageFile = imagecreatefromjpeg($image["tmp_name"]);
                 }      
 
                 $imageName = $user->imageGenerateName();
+                
                 imagejpeg($imageFile, "./img/users/" . $imageName, 100);
                 
                 $userData->image = $imageName;
@@ -68,6 +69,31 @@
 
         // Atualizar senha do usuário
     } else if($type === "changepassword") {
+
+        // Receber dados do post
+        $password = filter_input(INPUT_POST, "password");
+        $confirmpassword = filter_input(INPUT_POST, "confirmpassword");
+       
+        // Resgata dados do usuário
+        $userData = $userDao->verifyToken();
+
+        $id = $userData->id;
+        
+        if($password == $confirmpassword) {
+
+            // Criar um novo objeto de usuário
+            $user = new User();
+
+            $finalPassword = $user->generatePassword($password);
+
+            $user->password = $finalPassword;
+            $user->id = $id;
+
+            $userDao->changePassword($user);
+
+        } else {
+            $Message->setMessage("As senha não são iguais!", "error", "back");
+        }
 
     } else {
         $Message->setMessage("Informações inválidas!", "error", "index.php");
