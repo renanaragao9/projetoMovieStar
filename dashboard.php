@@ -34,7 +34,7 @@
                                 <i class="far fa-edit"></i> Editar
                             </a>
                             <form action="">
-                            <button type="submit" class="detele-btn">
+                            <button type="submit" class="delete-btn">
                                 <i class="fas fa-times"></i> Deletar
                             </button>
                         </form>
