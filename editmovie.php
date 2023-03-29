@@ -72,7 +72,7 @@
                             <label for="description">Descrição:</label>
                             <textarea name="description" class="form-control" id="description" rows="5" placeholder="Descreva o filme..."><?= $movie->description ?></textarea>
                         </div>
-                        <input type="submit" class="btn card-btn" value="Adicionar Filme">  
+                        <input type="submit" class="btn card-btn" value="Editar Filme">  
                     </form>
                 </div>
                 <div class="col-md-3">
