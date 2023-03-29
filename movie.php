@@ -40,13 +40,16 @@
             if($userData->id === $movie->users_id) {
                 $userOwnsMovie = true;
             }
+
+            // Resgatar as reviews do filme e ter somente um comentario por perfil
+            $alreadyReviewed = $reviewDao->hasAlreadyReviewed($id, $userData->id);
         }
 
         // Resgatar as reviews do filme
         $movieReviews = $reviewDao->getMoviesReview($id);
 
-        // Resgatar as reviews do filme
-        $alreadyReviewed = false;
+        // Resgatar as reviews do filme e ter varios comentarios por perfil
+        // $alreadyReviewed = false;
     
 ?>
 
