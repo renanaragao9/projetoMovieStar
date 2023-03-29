@@ -20,9 +20,10 @@
 
         // Verifica se o filme existe
         if(!$movie) {
+            
             $message->setMessage("O filme não foi encontrado!", "error", "index.php");
         }
-        
+    }
         // Checar se o filme tem imagem
         if($movie->image == "") {
             $movie->image = "movie_cover.jpg";
@@ -40,7 +41,7 @@
 
         // Resgatar as reviws do filme
         $alreadyReviewed = false;
-    }
+    
 ?>
 
 <div id="main-container" class="container-fluid">
