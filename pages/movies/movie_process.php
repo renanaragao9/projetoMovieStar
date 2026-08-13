@@ -1,10 +1,10 @@
 <?php
-    require_once("globals.php");
-    require_once("db.php");
-    require_once("dao/UserDAO.php");
-    require_once("dao/MovieDAO.php");
-    require_once("models/Movie.php");
-    require_once("models/Message.php");
+    require_once(__DIR__ . "/../../globals.php");
+    require_once(__DIR__ . "/../../database/db.php");
+    require_once(__DIR__ . "/../../dao/UserDAO.php");
+    require_once(__DIR__ . "/../../dao/MovieDAO.php");
+    require_once(__DIR__ . "/../../models/Movie.php");
+    require_once(__DIR__ . "/../../models/Message.php");
 
     $message = new Message($BASE_URL);
     $userDao = new UserDAO($conn, $BASE_URL);
@@ -61,7 +61,7 @@
                     // Gerando o nome da imagem
                     $imageName = $movie->imageGenerateName();
                     
-                    imagejpeg($imageFile, "./img/movies/" . $imageName, 100);
+                    imagejpeg($imageFile, __DIR__ . "/../../img/movies/" . $imageName, 100);
                     
                     $movie->image = $imageName;
     
@@ -92,12 +92,12 @@
                 
             } else {
                 
-                $message->setMessage("Informações inválidas!", "error", "index.php");
+                $message->setMessage("Informações inválidas!", "error", "pages/movies/index.php");
             }
 
         } else {
             
-            $message->setMessage("Informações inválidas!", "error", "index.php");
+            $message->setMessage("Informações inválidas!", "error", "pages/movies/index.php");
         }
     } else if($type === "update") {
 
@@ -153,7 +153,7 @@
                             
                             $imageName = $movie->imageGenerateName();
                             
-                            imagejpeg($imageFile, "./img/movies/" . $imageName, 100);
+                            imagejpeg($imageFile, __DIR__ . "/../../img/movies/" . $imageName, 100);
                             
                             $movieData->image = $imageName;
             
@@ -170,13 +170,13 @@
 
             } else {
                 
-                $message->setMessage("Informações inválidas!", "error", "index.php");
+                $message->setMessage("Informações inválidas!", "error", "pages/movies/index.php");
             }
         }
 
     }else {
     
-    $message->setMessage("Informações inválidas!", "error", "index.php");
+    $message->setMessage("Informações inválidas!", "error", "pages/movies/index.php");
     
     }
 

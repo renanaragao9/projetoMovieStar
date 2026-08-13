@@ -1,8 +1,8 @@
 <?php
-    require_once("templates/header.php");
-    require_once("models/User.php");
-    require_once("dao/UserDAO.php");
-    require_once("dao/MovieDAO.php");
+    require_once(__DIR__ . "/../../templates/header.php");
+    require_once(__DIR__ . "/../../models/User.php");
+    require_once(__DIR__ . "/../../dao/UserDAO.php");
+    require_once(__DIR__ . "/../../dao/MovieDAO.php");
     
     // Verifica se usuario está autenticado
     $user = new User();
@@ -17,7 +17,7 @@
         <h2 class="section-title">Dashboard</h2>
         <p class="section-description">Adicione ou atualize as informações dos filmes que você enviou</p>
         <div class="col-md-12" id="add-movie-container">
-            <a href="<?= $BASE_URL ?>newmovie.php" class="btn card-btn">
+            <a href="<?= $BASE_URL ?>pages/movies/newmovie.php" class="btn card-btn">
                 <i class="fas fa-plus"></i>Adicionar Filme 
             </a>
         </div>
@@ -33,13 +33,13 @@
                     <?php foreach($userMovies as $movie): ?>
                     <tr>
                         <td scope="row"><?= $movie->id ?></td>
-                        <td><a href="<?= $BASE_URL ?>movie.php?id=<?= $movie->id ?>" class="table-movie-title"><?= $movie->title ?></a></td>
+                        <td><a href="<?= $BASE_URL ?>pages/movies/movie.php?id=<?= $movie->id ?>" class="table-movie-title"><?= $movie->title ?></a></td>
                         <td><i class="fas fa-star"></i> <?= $movie->rating ?></td>
                         <td class="actions-column">
-                        <a href="<?= $BASE_URL ?>editmovie.php?id=<?= $movie->id ?>" class="edit-btn">
+                        <a href="<?= $BASE_URL ?>pages/movies/editmovie.php?id=<?= $movie->id ?>" class="edit-btn">
                                 <i class="far fa-edit"></i> Editar
                             </a>
-                            <form action="<?= $BASE_URL ?>movie_process.php" method="POST">
+                            <form action="<?= $BASE_URL ?>pages/movies/movie_process.php" method="POST">
                             <input type="hidden" name="type" value="delete">
                             <input type="hidden" name="id" value="<?= $movie->id ?>">
                             <button type="submit" class="delete-btn">
@@ -55,5 +55,5 @@
     </div>
 
 <?php
-    require_once("templates/footer.php");
+    require_once(__DIR__ . "/../../templates/footer.php");
 ?>

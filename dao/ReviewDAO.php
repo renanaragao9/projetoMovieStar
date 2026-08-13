@@ -1,8 +1,8 @@
 <?php
 
-    require_once("models/Review.php");
-    require_once("models/Message.php");
-    require_once("dao/UserDAO.php");
+    require_once(__DIR__ . "/../models/Review.php");
+    require_once(__DIR__ . "/../models/Message.php");
+    require_once(__DIR__ . "/UserDAO.php");
 
     //Review DAO
 
@@ -30,6 +30,7 @@
                 return $reviewObject;
 
             }
+
             public function create(Review $review) {
                 print_r($review);
                 $stmt = $this->conn->prepare("INSERT INTO reviews (
@@ -46,8 +47,7 @@
                     
                     $stmt->execute();
     
-                    // Mensagem de sucesso por adicionar fime
-                    $this->message->setMessage("Crítica adicionada com sucesso!", "success", "index.php");
+                    $this->message->setMessage("Crítica adicionada com sucesso!", "success", "pages/movies/index.php");
 
             }
             public function getMoviesReview($id) {

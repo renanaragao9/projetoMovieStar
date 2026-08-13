@@ -1,11 +1,11 @@
 <?php
     
-    require_once("templates/header.php");
+    require_once(__DIR__ . "/../../templates/header.php");
     
     // Verifica se usuario está autenticado
-    require_once("models/User.php");
-    require_once("dao/UserDAO.php");
-    require_once("dao/MovieDAO.php");
+    require_once(__DIR__ . "/../../models/User.php");
+    require_once(__DIR__ . "/../../dao/UserDAO.php");
+    require_once(__DIR__ . "/../../dao/MovieDAO.php");
     
     // Verifica se usuario está autenticado
     $user = new User();
@@ -15,7 +15,7 @@
     $id = filter_input(INPUT_GET, "id");
 
     if(empty($id)) {
-        $message->setMessage("O filme não foi encontrado!", "error", "index.php");
+        $message->setMessage("O filme não foi encontrado!", "error", "pages/movies/index.php");
     } else {
 
         $movie = $movieDao->findById($id);
@@ -23,7 +23,7 @@
         // Verifica se o filme existe
         if(!$movie) {
             
-            $message->setMessage("O filme não foi encontrado!", "error", "index.php");
+            $message->setMessage("O filme não foi encontrado!", "error", "pages/movies/index.php");
         }
     }
 
@@ -39,7 +39,7 @@
                 <div class="col-md-6 offset-md-1">
                     <h1><?= $movie->title ?></h1>
                     <p class="page-description">Altere os dados do filme do formuçário abaixo:</p>
-                    <form id="edit-movie-form" action="<?= $BASE_URL ?>movie_process.php" method="POST" enctype="multipart/form-data">
+                    <form id="edit-movie-form" action="<?= $BASE_URL ?>pages/movies/movie_process.php" method="POST" enctype="multipart/form-data">
                         <input type="hidden" name="type" value="update">
                         <input type="hidden" name="id" value="<?= $movie->id ?>">
                         <div class="form-group">
@@ -86,5 +86,5 @@
     </div>
 
 <?php
-    require_once("templates/footer.php");
+    require_once(__DIR__ . "/../../templates/footer.php");
 ?>

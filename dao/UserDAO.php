@@ -1,7 +1,7 @@
 <?php
 
-    require_once("models/User.php");
-    require_once("models/Message.php");
+    require_once(__DIR__ . "/../models/User.php");
+    require_once(__DIR__ . "/../models/Message.php");
 
     class UserDao implements UserDAOInterface {
 
@@ -75,7 +75,7 @@
             if($redirect) {
 
                 // Redireciona para o perfil do usuario
-                $this->message->setMessage("Dados atualizados com sucesso!", "success", "editprofile.php");
+                $this->message->setMessage("Dados atualizados com sucesso!", "success", "pages/users/editprofile.php");
             }
         }
 
@@ -95,12 +95,12 @@
                 } else if($protected) {
                     
                     // Redireciona para o perfil do usuario
-                    $this->message->setMessage("Faça a autenticação para acessar esta página!", "error", "index.php");
+                    $this->message->setMessage("Faça a autenticação para acessar esta página!", "error", "pages/movies/index.php");
                 }
             } else if($protected) {
                     
                 // Redireciona para o perfil do usuario
-                $this->message->setMessage("Faça a autenticação para acessar esta página!", "error", "index.php");
+                $this->message->setMessage("Faça a autenticação para acessar esta página!", "error", "pages/movies/index.php");
             }
         }
 
@@ -112,7 +112,7 @@
             if($redirect) {
 
                 // Redireciona para o perfil do usuario
-                $this->message->setMessage("Seja bem-vindo!", "success", "editprofile.php");
+                $this->message->setMessage("Seja bem-vindo!", "success", "pages/users/editprofile.php");
             }
         }
 
@@ -199,7 +199,7 @@
             $_SESSION["token"] = "";
 
              // Redirecionar e apresentar a mensagem de sucesso
-             $this->message->setMessage("Você fez o logout com sucesso!", "success", "index.php");
+             $this->message->setMessage("Você fez o logout com sucesso!", "success", "pages/movies/index.php");
         }
 
         public function changePassword(User $user) {
@@ -215,7 +215,7 @@
             $stmt->execute();
 
             // Redirecionar e apresentar a mensagem de sucesso
-            $this->message->setMessage("Senha alterada com sucesso!", "success", "editprofile.php");
+            $this->message->setMessage("Senha alterada com sucesso!", "success", "pages/users/editprofile.php");
         }
     }
 

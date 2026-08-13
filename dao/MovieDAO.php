@@ -1,8 +1,8 @@
 <?php
 
-    require_once("models/Movie.php");
-    require_once("models/Message.php");
-    require_once("dao/ReviewDAO.php");
+    require_once(__DIR__ . "/../models/Movie.php");
+    require_once(__DIR__ . "/../models/Message.php");
+    require_once(__DIR__ . "/ReviewDAO.php");
 
 
     class MovieDAO implements MovieDAOInterface {
@@ -171,7 +171,7 @@
                 $stmt->execute();
 
                 // Mensagem de sucesso por adicionar fime
-                $this->message->setMessage("Filme adicionado com sucesso!", "success", "index.php");
+                $this->message->setMessage("Filme adicionado com sucesso!", "success", "pages/movies/index.php");
         }
 
         public function update(Movie $movie) {
@@ -189,7 +189,7 @@
             $stmt->execute();
 
             //  Mensagem de sucesso por editar filme
-            $this->message->setMessage("Filme atualizado com sucesso!", "success", "dashboard.php");
+            $this->message->setMessage("Filme atualizado com sucesso!", "success", "pages/movies/dashboard.php");
         }
 
         public function destroy($id) {
@@ -201,7 +201,7 @@
             $stmt->execute();
 
             //  Mensagem de sucesso por remover filme
-            $this->message->setMessage("Filme removido com sucesso!", "success", "dashboard.php");
+            $this->message->setMessage("Filme removido com sucesso!", "success", "pages/movies/dashboard.php");
         }
     }
 

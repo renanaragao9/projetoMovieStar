@@ -1,15 +1,14 @@
 <?php
     
-    require_once("globals.php");
-    require_once("db.php");
-    require_once("dao/UserDAO.php");
-    require_once("models/User.php");
-    require_once("models/Message.php");
+    require_once(__DIR__ . "/../../globals.php");
+    require_once(__DIR__ . "/../../database/db.php");
+    require_once(__DIR__ . "/../../dao/UserDAO.php");
+    require_once(__DIR__ . "/../../models/User.php");
+    require_once(__DIR__ . "/../../models/Message.php");
 
     $Message = new Message($BASE_URL);
     $userDao = new UserDAO($conn, $BASE_URL);
     
-    //Resgatar o tipo de formulario
     $type = filter_input(INPUT_POST, "type");
 
     if($type == "register") {
@@ -67,7 +66,7 @@
         // Tenta autenticar usuário, caso não conseguir autenticar
         if($userDao->authenticateUser($email, $password)) {
 
-            $Message->setMessage("Seja bem-vindo!", "success", "editprofile.php");
+            $Message->setMessage("Seja bem-vindo!", "success", "pages/users/editprofile.php");
 
             // Redireciona o usuário, caso não conseguir autenticar
         } else {

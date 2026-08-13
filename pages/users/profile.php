@@ -1,10 +1,10 @@
 <?php
-    require_once("templates/header.php");
+    require_once(__DIR__ . "/../../templates/header.php");
     
     // Verifica se usuario está autenticado
-    require_once("models/User.php");
-    require_once("dao/UserDAO.php");
-    require_once("dao/MovieDAO.php");
+    require_once(__DIR__ . "/../../models/User.php");
+    require_once(__DIR__ . "/../../dao/UserDAO.php");
+    require_once(__DIR__ . "/../../dao/MovieDAO.php");
 
     $user = new User();
     $userDao = new UserDAO($conn, $BASE_URL);
@@ -19,14 +19,14 @@
             $id = $userData->id;
 
         } else {
-            $message->setMessage("Usuário não encontrado!", "error", "index.php");
+            $message->setMessage("Usuário não encontrado!", "error", "pages/movies/index.php");
         }
     } else {
 
         $userData = $userDao->findById($id);
         
         if(!$userData) {
-            $message->setMessage("Usuário não encontrado!", "error", "index.php");
+            $message->setMessage("Usuário não encontrado!", "error", "pages/movies/index.php");
         }
     }
 
@@ -58,7 +58,7 @@
                 <h3>Filmes que enviou:</h3>
                 <div class="movies-container">
                     <?php foreach($userMovies as $movie): ?>
-                        <?php require("templates/movie_card.php"); ?>
+                        <?php require(__DIR__ . "/../../templates/movie_card.php"); ?>
                     <?php endforeach; ?>
                     <?php if(count($userMovies) === 0): ?>
                         <p class="empty-list">O usuário ainda não enviou filmes.</p>
@@ -70,5 +70,5 @@
 </div>
 
 <?php
-    require_once("templates/footer.php");
+    require_once(__DIR__ . "/../../templates/footer.php");
 ?>

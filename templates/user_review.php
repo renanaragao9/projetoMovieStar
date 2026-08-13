@@ -1,6 +1,6 @@
 <?php
 
-    require_once("models/User.php");
+    require_once(__DIR__ . "/../models/User.php");
 
     $userModel = new User();
 
@@ -19,7 +19,7 @@
         </div>
         <div class="col-md-9 author-details-container">
             <h4 class="author-name">
-                <a href="<?= $BASE_URL ?>profile.php?id=<?= $review->user->id ?>"><?= $fullName ?></a>
+                <a href="<?= $BASE_URL ?>pages/users/profile.php?id=<?= $review->user->id ?>"><?= $fullName ?></a>
             </h4>
             <p><i class="fas fa-star"></i> <?= $review->rating ?> </p>
         </div>

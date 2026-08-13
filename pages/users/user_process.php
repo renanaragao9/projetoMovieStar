@@ -1,10 +1,10 @@
 <?php
     
-    require_once("globals.php");
-    require_once("db.php");
-    require_once("dao/UserDAO.php");
-    require_once("models/User.php");
-    require_once("models/Message.php");
+    require_once(__DIR__ . "/../../globals.php");
+    require_once(__DIR__ . "/../../database/db.php");
+    require_once(__DIR__ . "/../../dao/UserDAO.php");
+    require_once(__DIR__ . "/../../models/User.php");
+    require_once(__DIR__ . "/../../models/Message.php");
 
     $Message = new Message($BASE_URL);
     $userDao = new UserDAO($conn, $BASE_URL);
@@ -56,7 +56,7 @@
 
                 $imageName = $user->imageGenerateName();
                 
-                imagejpeg($imageFile, "./img/users/" . $imageName, 100);
+                imagejpeg($imageFile, __DIR__ . "/../../img/users/" . $imageName, 100);
                 
                 $userData->image = $imageName;
 
@@ -96,7 +96,7 @@
         }
 
     } else {
-        $Message->setMessage("Informações inválidas!", "error", "index.php");
+        $Message->setMessage("Informações inválidas!", "error", "pages/movies/index.php");
     }
 
 ?>
