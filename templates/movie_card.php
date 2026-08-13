@@ -1,7 +1,6 @@
 <?php
-   if(empty($movie->image)) {
-    $movie->image = "movie_cover.jpg";
-   }
+   require_once(__DIR__ . "/../img/Storage.php");
+   $movie->image = Storage::movieCover($movie->image);
 ?>
 
 <div class="card movie-card">

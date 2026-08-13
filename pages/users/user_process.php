@@ -5,9 +5,11 @@
     require_once(__DIR__ . "/../../dao/UserDAO.php");
     require_once(__DIR__ . "/../../models/User.php");
     require_once(__DIR__ . "/../../models/Message.php");
+    require_once(__DIR__ . "/../../img/Storage.php");
 
     $Message = new Message($BASE_URL);
     $userDao = new UserDAO($conn, $BASE_URL);
+    $storage = new Storage();
 
     //Resgatar o tipo de formulario
     $type = filter_input(INPUT_POST, "type");
@@ -35,31 +37,13 @@
 
         // Upload da imagem
         if(isset($_FILES["image"]) && !empty($_FILES["image"]["tmp_name"])) {
-           
-            $image = $_FILES["image"];
-            $imageTypes = ["image/jpeg", "image/jpg", "image/png"];
-            $jpgArray = ["image/png"];
 
-            // Checagem de tipo de imagem
-            if(in_array($image["type"], $imageTypes)) {
+            $imageName = $user->imageGenerateName();
 
-                // Checar se é png
-                if(in_array($image["type"], $jpgArray)) {
-                    
-                    $imageFile = imagecreatefrompng($image["tmp_name"]);
-                    
-                    // Checar se é jpg ou jpeg
-                } else {
-                    
-                    $imageFile = imagecreatefromjpeg($image["tmp_name"]);
-                }      
+            $savedName = $storage->save($_FILES["image"], Storage::USERS_DIR, $imageName);
 
-                $imageName = $user->imageGenerateName();
-                
-                imagejpeg($imageFile, __DIR__ . "/../../img/users/" . $imageName, 100);
-                
-                $userData->image = $imageName;
-
+            if($savedName !== null) {
+                $userData->image = $savedName;
             } else {
                 $Message->setMessage("Tipo inválido de imagem, insira png ou jpg!", "error", "back");
             }

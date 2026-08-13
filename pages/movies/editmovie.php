@@ -6,6 +6,7 @@
     require_once(__DIR__ . "/../../models/User.php");
     require_once(__DIR__ . "/../../dao/UserDAO.php");
     require_once(__DIR__ . "/../../dao/MovieDAO.php");
+    require_once(__DIR__ . "/../../img/Storage.php");
     
     // Verifica se usuario está autenticado
     $user = new User();
@@ -28,9 +29,7 @@
     }
 
     // Checar se o filme tem imagem
-    if($movie->image == "") {
-        $movie->image = "movie_cover.jpg";
-    }
+    $movie->image = Storage::movieCover($movie->image);
 
 ?>
     <div id="main-container" class="container-fluid">

@@ -5,10 +5,12 @@
     require_once(__DIR__ . "/../../dao/MovieDAO.php");
     require_once(__DIR__ . "/../../models/Movie.php");
     require_once(__DIR__ . "/../../models/Message.php");
+    require_once(__DIR__ . "/../../img/Storage.php");
 
     $message = new Message($BASE_URL);
     $userDao = new UserDAO($conn, $BASE_URL);
     $movieDao = new MovieDAO($conn, $BASE_URL);
+    $storage = new Storage();
 
     //Resgatar o tipo de formulario
     $type = filter_input(INPUT_POST, "type");
@@ -39,34 +41,15 @@
 
             // Upload de imagem do filme
             if(isset($_FILES["image"]) && !empty($_FILES["image"]["tmp_name"])) {
-           
-                $image = $_FILES["image"];
-                $imageTypes = ["image/jpeg", "image/jpg", "image/png"];
-                $jpgArray = ["image/png"];
-    
-                // Checagem de tipo de imagem
-                if(in_array($image["type"], $imageTypes)) {
-    
-                    // Checar se é png
-                    if(in_array($image["type"], $jpgArray)) {
-                        
-                        $imageFile = imagecreatefrompng($image["tmp_name"]);
-                        
-                        // Checar se é jpg ou jpeg
-                    } else {
-                        
-                        $imageFile = imagecreatefromjpeg($image["tmp_name"]);
-                    }      
-                    
-                    // Gerando o nome da imagem
-                    $imageName = $movie->imageGenerateName();
-                    
-                    imagejpeg($imageFile, __DIR__ . "/../../img/movies/" . $imageName, 100);
-                    
-                    $movie->image = $imageName;
-    
+
+                $imageName = $movie->imageGenerateName();
+
+                $savedName = $storage->save($_FILES["image"], Storage::MOVIES_DIR, $imageName);
+
+                if($savedName !== null) {
+                    $movie->image = $savedName;
                 } else {
-                    $Message->setMessage("Tipo inválido de imagem, insira png ou jpg!", "error", "back");
+                    $message->setMessage("Tipo inválido de imagem, insira png ou jpg!", "error", "back");
                 }
             }
 
@@ -129,36 +112,15 @@
 
                     // Upload de imagem do filme
                     if(isset($_FILES["image"]) && !empty($_FILES["image"]["tmp_name"])) {
-                
-                        $image = $_FILES["image"];
-                        $imageTypes = ["image/jpeg", "image/jpg", "image/png"];
-                        $jpgArray = ["image/png"];
-            
-                        // Checagem de tipo de imagem
-                        if(in_array($image["type"], $imageTypes)) {
-            
-                            // Checar se é png
-                            if(in_array($image["type"], $jpgArray)) {
-                                
-                                $imageFile = imagecreatefrompng($image["tmp_name"]);
-                                
-                                // Checar se é jpg ou jpeg
-                            } else {
-                                
-                                $imageFile = imagecreatefromjpeg($image["tmp_name"]);
-                            }      
-                            
-                            // Gerando o nome da imagem
-                            $movie = new Movie();
-                            
-                            $imageName = $movie->imageGenerateName();
-                            
-                            imagejpeg($imageFile, __DIR__ . "/../../img/movies/" . $imageName, 100);
-                            
-                            $movieData->image = $imageName;
-            
+
+                        $imageName = $movieData->imageGenerateName();
+
+                        $savedName = $storage->save($_FILES["image"], Storage::MOVIES_DIR, $imageName);
+
+                        if($savedName !== null) {
+                            $movieData->image = $savedName;
                         } else {
-                            $Message->setMessage("Tipo inválido de imagem, insira png ou jpg!", "error", "back");
+                            $message->setMessage("Tipo inválido de imagem, insira png ou jpg!", "error", "back");
                         }
                     }
                     

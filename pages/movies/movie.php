@@ -5,6 +5,7 @@
     require_once(__DIR__ . "/../../models/Movie.php");
     require_once(__DIR__ . "/../../dao/MovieDAO.php");
     require_once(__DIR__ . "/../../dao/ReviewDAO.php");
+    require_once(__DIR__ . "/../../img/Storage.php");
 
     // Pegar o id do fillme
     $id = filter_input(INPUT_GET, "id");
@@ -28,9 +29,7 @@
         }
     }
         // Checar se o filme tem imagem
-        if($movie->image == "") {
-            $movie->image = "movie_cover.jpg";
-        }
+        $movie->image = Storage::movieCover($movie->image);
 
         // Checar se o filme é do usuario
         $userOwnsMovie = false;

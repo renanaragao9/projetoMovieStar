@@ -1,1 +1,7 @@
 .env
+
+img/movies/*
+!img/movies/movie_cover.jpg
+
+img/users/*
+!img/users/user.png
